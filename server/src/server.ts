@@ -17,13 +17,17 @@ app.use(cookieParser());
 
 
 app.get("/", (req, res) => {
-    return res.json({ status: "success" });
+    return res.status(200).json({ success: true, message: "Welcome to the GitHub OAuth App" });
 });
 
 app.get("/profile", authMiddleware, async (req:any , res:any) => {
     const user = await User.findById(req.user.id);
-    console.log(req.user);
-    return res.json({ status: "success", message: "You are authenticated", user });
+    return res.status(200).json({ success: true, message: "You are authenticated", user });
+});
+
+app.get("/api/user/data", authMiddleware, async (req: any, res: any) => {
+    const user = await User.findById(req.user.id);
+    return res.status(200).json({ success: true, user });
 });
 
 app.use("/auth/github", authRouter);

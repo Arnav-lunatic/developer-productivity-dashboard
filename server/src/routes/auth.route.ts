@@ -62,7 +62,7 @@ router.get("/callback", async (req, res) => {
 
 	const token = generateJwtToken(user._id.toString());
 
-	res.cookie("token", token, {
+	res.status(200).cookie("token", token, {
 		httpOnly: true,
 		maxAge: 30 * 24 * 60 * 60 * 1000,
 	});
