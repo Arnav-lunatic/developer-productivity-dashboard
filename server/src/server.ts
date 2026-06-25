@@ -5,9 +5,14 @@ import cookieParser from "cookie-parser";
 import "dotenv/config";
 import { authMiddleware } from "./middleware/auth.middleware.ts";
 import { User } from "./models/user.model.ts";
-
+import cors from "cors";
 const app = express();
-
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 const PORT = process.env.PORT;
 
 connectDB(process.env.MONGO_URI!);
